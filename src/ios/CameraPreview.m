@@ -538,8 +538,10 @@
     if (command.arguments.count > 1) {
         CGFloat width = (CGFloat)[command.arguments[0] floatValue];
         CGFloat height = (CGFloat)[command.arguments[1] floatValue];
+        CGFloat x = (CGFloat)[command.arguments[2] floatValue] + self.webView.frame.origin.x;
+        CGFloat y = (CGFloat)[command.arguments[3] floatValue] + self.webView.frame.origin.y;
 
-        self.cameraRenderController.view.frame = CGRectMake(0, 0, width, height);
+        self.cameraRenderController.view.frame = CGRectMake(x, y, width, height);
 
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     } else {

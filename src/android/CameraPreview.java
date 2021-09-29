@@ -145,7 +145,7 @@ public class CameraPreview extends CordovaPlugin implements CameraActivity.Camer
     } else if (GET_MAX_ZOOM_ACTION.equals(action)) {
       return getMaxZoom(callbackContext);
     } else if (PREVIEW_SIZE_ACTION.equals(action)) {
-      return setPreviewSize(args.getInt(0), args.getInt(1), callbackContext);
+      return setPreviewSize(args.getInt(0), args.getInt(1), args.getInt(2), args.getInt(3), callbackContext);
     } else if (SUPPORTED_FLASH_MODES_ACTION.equals(action)) {
       return getSupportedFlashModes(callbackContext);
     } else if (GET_FLASH_MODE_ACTION.equals(action)) {
@@ -853,6 +853,19 @@ public class CameraPreview extends CordovaPlugin implements CameraActivity.Camer
 
     params.setPreviewSize(width, height);
     fragment.setCameraParameters(params);
+
+    DisplayMetrics metrics = cordova.getActivity().getResources().getDisplayMetrics();
+
+    // offset
+    int computedX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, x, metrics);
+    int computedY = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, y, metrics);
+
+    // size
+    int computedWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, width, metrics);
+    int computedHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height, metrics);
+
+    fragment.setRect(computedX, computedY, computedWidth, computedHeight);
+
     camera.startPreview();
 
     callbackContext.success();

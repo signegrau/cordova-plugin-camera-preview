@@ -37,6 +37,8 @@ declare module 'cordova-plugin-camera-preview' {
   interface CameraPreviewPreviewSizeDimension {
     height?: number;
     width?: number;
+    x?: number;
+    y?: number;
   }
 
   interface CameraPreview {
