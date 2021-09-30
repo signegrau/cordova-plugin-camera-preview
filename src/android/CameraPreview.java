@@ -843,7 +843,7 @@ public class CameraPreview extends CordovaPlugin implements CameraActivity.Camer
     return true;
   }
 
-  private boolean setPreviewSize(int width, int height, CallbackContext callbackContext) {
+  private boolean setPreviewSize(int width, int height, int x, int y, CallbackContext callbackContext) {
     if(this.hasCamera(callbackContext) == false){
       return true;
     }
